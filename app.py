@@ -22,15 +22,15 @@ def index():
             flipkartPage = uClient.read()
             uClient.close()
             flipkart_html = bs(flipkartPage, "html.parser")
-            bigboxes = flipkart_html.findAll("div", {"class": "_1AtVbE col-12-12"})
+            bigboxes = flipkart_html.findAll("div", {"class": "tUxRFH"})
             del bigboxes[0:3]
             box = bigboxes[0]
-            productLink = "https://www.flipkart.com" + box.div.div.div.a['href']
+            productLink = "https://www.flipkart.com" + box.a['href']
             prodRes = requests.get(productLink)
             prodRes.encoding='utf-8'
             prod_html = bs(prodRes.text, "html.parser")
             print(prod_html)
-            commentboxes = prod_html.find_all('div', {'class': "_16PBlm"})
+            commentboxes = prod_html.find_all('div', {'class': "_8-rIO3"})
 
             filename = searchString + ".csv"
             fw = open(filename, "w")
@@ -83,4 +83,4 @@ def index():
 
 
 if __name__=="__main__":
-    app.run(host="0.0.0.0")
+    app.run(port=3005)
